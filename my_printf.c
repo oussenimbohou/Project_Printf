@@ -7,9 +7,11 @@ int _printf(char *format, ...)
 	unsigned int i;
 	va_list argument;
 	char *s;
+	int d;
 
 	va_start(argument, format);
-	for(ptr = format; *ptr != '\0'; ptr++)
+
+	for (ptr = format; *ptr != '\0'; ptr++)
 	{
 		while (*ptr != '%')
 		{
@@ -17,7 +19,8 @@ int _printf(char *format, ...)
 			ptr++;
 		}
 		ptr++;
-		switch(*ptr)
+
+		switch (*ptr)
 		{
 			case 'c':
 				i = va_arg(argument, int);
@@ -27,12 +30,16 @@ int _printf(char *format, ...)
 				s = va_arg(argument, char *);
 				puts(s);
 				break;
+			case 'd':
+				d = va_arg(argument, int);
+				putchar(d + '0');
+				break;
 		}
 	}
 }
 
 int main(void)
 {
-	_printf("This is my char %c, and it's from %s",'A',"Barack");
+	_printf("This is my char %c, and it's from %s, and add %d", 'A',"Barack", 9);
 	return (0);
 }
